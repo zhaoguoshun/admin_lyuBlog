@@ -1,0 +1,158 @@
+:export {
+  menuText: #bfcbd9;
+  menuActiveText: #409EFF;
+  subMenuActiveText: #f4f4f5;
+  menuBg: #304156;
+  menuHover: #263445;
+  menuLightBg: #ffffff;
+  menuLightHover: #f0f1f5;
+  subMenuBg: #1f2d3d;
+  subMenuHover: #001528;
+  sideBarWidth: 200px;
+  sidebarTitle: #ffffff;
+  sidebarLightTitle: #001529;
+}
+
+.blue-btn {
+  background: #324157;
+}
+
+.blue-btn:hover {
+  color: #324157;
+}
+
+.blue-btn:hover:before, .blue-btn:hover:after {
+  background: #324157;
+}
+
+.light-blue-btn {
+  background: #3A71A8;
+}
+
+.light-blue-btn:hover {
+  color: #3A71A8;
+}
+
+.light-blue-btn:hover:before, .light-blue-btn:hover:after {
+  background: #3A71A8;
+}
+
+.red-btn {
+  background: #C03639;
+}
+
+.red-btn:hover {
+  color: #C03639;
+}
+
+.red-btn:hover:before, .red-btn:hover:after {
+  background: #C03639;
+}
+
+.pink-btn {
+  background: #E65D6E;
+}
+
+.pink-btn:hover {
+  color: #E65D6E;
+}
+
+.pink-btn:hover:before, .pink-btn:hover:after {
+  background: #E65D6E;
+}
+
+.green-btn {
+  background: #30B08F;
+}
+
+.green-btn:hover {
+  color: #30B08F;
+}
+
+.green-btn:hover:before, .green-btn:hover:after {
+  background: #30B08F;
+}
+
+.tiffany-btn {
+  background: #4AB7BD;
+}
+
+.tiffany-btn:hover {
+  color: #4AB7BD;
+}
+
+.tiffany-btn:hover:before, .tiffany-btn:hover:after {
+  background: #4AB7BD;
+}
+
+.yellow-btn {
+  background: #FEC171;
+}
+
+.yellow-btn:hover {
+  color: #FEC171;
+}
+
+.yellow-btn:hover:before, .yellow-btn:hover:after {
+  background: #FEC171;
+}
+
+.pan-btn {
+  font-size: 14px;
+  color: #fff;
+  padding: 14px 36px;
+  border-radius: 8px;
+  border: none;
+  outline: none;
+  -webkit-transition: 600ms ease all;
+  transition: 600ms ease all;
+  position: relative;
+  display: inline-block;
+}
+
+.pan-btn:hover {
+  background: #fff;
+}
+
+.pan-btn:hover:before, .pan-btn:hover:after {
+  width: 100%;
+  -webkit-transition: 600ms ease all;
+  transition: 600ms ease all;
+}
+
+.pan-btn:before, .pan-btn:after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 2px;
+  width: 0;
+  -webkit-transition: 400ms ease all;
+  transition: 400ms ease all;
+}
+
+.pan-btn::after {
+  right: inherit;
+  top: inherit;
+  left: 0;
+  bottom: 0;
+}
+
+.custom-button {
+  display: inline-block;
+  line-height: 1;
+  white-space: nowrap;
+  cursor: pointer;
+  background: #fff;
+  color: #fff;
+  -webkit-appearance: none;
+  text-align: center;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  outline: 0;
+  margin: 0;
+  padding: 10px 15px;
+  font-size: 14px;
+  border-radius: 4px;
+}
+/*# sourceMappingURL=btn.css.map */
