@@ -106,6 +106,19 @@ export const constantRoutes = [{
             }
         }]
     },
+
+  {
+    path: "/albums",
+    component: Layout,
+    name:'albumsInfo',
+    children: [{
+      path: "profile",
+      component: resolve =>
+        require(["@/views/photo/Photo.vue"], resolve),
+      name: "albumsInfo",
+      meta: { title: "图库", icon: "user" }
+    }]
+  },
     {
         path: "/user",
         component: Layout,
