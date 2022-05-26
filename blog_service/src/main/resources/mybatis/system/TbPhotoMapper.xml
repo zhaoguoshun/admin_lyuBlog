@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wanou.project.system.mapper.TbPhotoMapper">
+
+    <resultMap type="TbPhoto" id="TbPhotoResult">
+        <result property="id"    column="id"    />
+        <result property="albumId"    column="album_id"    />
+        <result property="photoName"    column="photo_name"    />
+        <result property="photoDesc"    column="photo_desc"    />
+        <result property="photoSrc"    column="photo_src"    />
+        <result property="isDelete"    column="is_delete"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectTbPhotoVo">
+        select id, album_id, photo_name, photo_desc, photo_src, is_delete, create_time, update_time from tb_photo
+    </sql>
+
+    <select id="selectTbPhotoList" parameterType="TbPhoto" resultMap="TbPhotoResult">
+        <include refid="selectTbPhotoVo"/>
+        <where>
+            <if test="albumId != null "> and album_id = #{albumId}</if>
+            <if test="photoName != null  and photoName != ''"> and photo_name like concat('%', #{photoName}, '%')</if>
+            <if test="photoDesc != null  and photoDesc != ''"> and photo_desc = #{photoDesc}</if>
+            <if test="photoSrc != null  and photoSrc != ''"> and photo_src = #{photoSrc}</if>
+            <if test="isDelete != null "> and is_delete = #{isDelete}</if>
+        </where>
+    </select>
+
+    <select id="selectTbPhotoById" parameterType="Long" resultMap="TbPhotoResult">
+        <include refid="selectTbPhotoVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertTbPhoto" parameterType="TbPhoto" useGeneratedKeys="true" keyProperty="id">
+        insert into tb_photo
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="albumId != null">album_id,</if>
+            <if test="photoName != null and photoName != ''">photo_name,</if>
+            <if test="photoDesc != null">photo_desc,</if>
+            <if test="photoSrc != null and photoSrc != ''">photo_src,</if>
+            <if test="isDelete != null">is_delete,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateTime != null">update_time,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="albumId != null">#{albumId},</if>
+            <if test="photoName != null and photoName != ''">#{photoName},</if>
+            <if test="photoDesc != null">#{photoDesc},</if>
+            <if test="photoSrc != null and photoSrc != ''">#{photoSrc},</if>
+            <if test="isDelete != null">#{isDelete},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+        </trim>
+    </insert>
+
+    <update id="updateTbPhoto" parameterType="TbPhoto">
+        update tb_photo
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="albumId != null">album_id = #{albumId},</if>
+            <if test="photoName != null and photoName != ''">photo_name = #{photoName},</if>
+            <if test="photoDesc != null">photo_desc = #{photoDesc},</if>
+            <if test="photoSrc != null and photoSrc != ''">photo_src = #{photoSrc},</if>
+            <if test="isDelete != null">is_delete = #{isDelete},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteTbPhotoById" parameterType="Long">
+        delete from tb_photo where id = #{id}
+    </delete>
+
+    <delete id="deleteTbPhotoByIds" parameterType="String">
+        delete from tb_photo where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

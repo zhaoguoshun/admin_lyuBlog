@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wanou.project.system.mapper.TbPhotoAlbumMapper">
+
+    <resultMap type="TbPhotoAlbum" id="TbPhotoAlbumResult">
+        <result property="id"    column="id"    />
+        <result property="albumName"    column="album_name"    />
+        <result property="albumDesc"    column="album_desc"    />
+        <result property="albumCover"    column="album_cover"    />
+        <result property="isDelete"    column="is_delete"    />
+        <result property="status"    column="status"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectTbPhotoAlbumVo">
+        select id, album_name, album_desc, album_cover, is_delete, status, create_time, update_time from tb_photo_album
+    </sql>
+
+    <select id="selectTbPhotoAlbumList" parameterType="TbPhotoAlbum" resultMap="TbPhotoAlbumResult">
+        <include refid="selectTbPhotoAlbumVo"/>
+        <where>
+            <if test="albumName != null  and albumName != ''"> and album_name like concat('%', #{albumName}, '%')</if>
+            <if test="albumDesc != null  and albumDesc != ''"> and album_desc = #{albumDesc}</if>
+            <if test="albumCover != null  and albumCover != ''"> and album_cover = #{albumCover}</if>
+            <if test="isDelete != null "> and is_delete = #{isDelete}</if>
+            <if test="status != null "> and status = #{status}</if>
+        </where>
+    </select>
+
+    <select id="selectTbPhotoAlbumById" parameterType="Long" resultMap="TbPhotoAlbumResult">
+        <include refid="selectTbPhotoAlbumVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertTbPhotoAlbum" parameterType="TbPhotoAlbum" useGeneratedKeys="true" keyProperty="id">
+        insert into tb_photo_album
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="albumName != null and albumName != ''">album_name,</if>
+            <if test="albumDesc != null and albumDesc != ''">album_desc,</if>
+            <if test="albumCover != null and albumCover != ''">album_cover,</if>
+            <if test="isDelete != null">is_delete,</if>
+            <if test="status != null">status,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateTime != null">update_time,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="albumName != null and albumName != ''">#{albumName},</if>
+            <if test="albumDesc != null and albumDesc != ''">#{albumDesc},</if>
+            <if test="albumCover != null and albumCover != ''">#{albumCover},</if>
+            <if test="isDelete != null">#{isDelete},</if>
+            <if test="status != null">#{status},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+        </trim>
+    </insert>
+
+    <update id="updateTbPhotoAlbum" parameterType="TbPhotoAlbum">
+        update tb_photo_album
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="albumName != null and albumName != ''">album_name = #{albumName},</if>
+            <if test="albumDesc != null and albumDesc != ''">album_desc = #{albumDesc},</if>
+            <if test="albumCover != null and albumCover != ''">album_cover = #{albumCover},</if>
+            <if test="isDelete != null">is_delete = #{isDelete},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteTbPhotoAlbumById" parameterType="Long">
+        delete from tb_photo_album where id = #{id}
+    </delete>
+
+    <delete id="deleteTbPhotoAlbumByIds" parameterType="String">
+        delete from tb_photo_album where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>
